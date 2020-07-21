@@ -36,7 +36,8 @@ make_inner_pkg() {
   pkg_size=$(du -sk "${tmp_dir}" | awk '{print $1}')
   echo "${pkg_size}" >>"$dest_dir/extractsize_tmp"
 
-  ls --color=no $tmp_dir | tar -cJf $dest_pkg -C "$tmp_dir" -T /dev/stdin
+  #ls --color=no $tmp_dir | tar -cJf $dest_pkg -C "$tmp_dir" -T /dev/stdin
+  ls $tmp_dir | tar -cJf $dest_pkg -C "$tmp_dir" -T /dev/stdin
 }
 
 spk_build_part() {
@@ -55,7 +56,8 @@ make_spk() {
   rm "${spk_tmp_dir}/extractsize_tmp"
 
   # copy scripts and icon
-  cp -ra src/scripts $spk_tmp_dir
+  #cp -ra src/scripts $spk_tmp_dir
+  cp -a src/scripts $spk_tmp_dir
   cp -a src/PACKAGE_ICON*.PNG $spk_tmp_dir
 
   # Generate INFO file
@@ -66,8 +68,8 @@ make_spk() {
 
 make_pkg() {
   mkdir -p ./_build
-  local pkg_temp_dir=$(mktemp -d -p ./_build)
-  local spk_temp_dir=$(mktemp -d -p ./_build)
+  local pkg_temp_dir=$(mktemp -d ./_build/XXXX)
+  local spk_temp_dir=$(mktemp -d ./_build/XXXX)
 
   make_inner_pkg ${pkg_temp_dir} ${spk_temp_dir}
   make_spk ${spk_temp_dir}
