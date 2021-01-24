@@ -3,6 +3,12 @@
 
 Synology NAS package for Tailscale based on precompiled static binaries.
 
+## Caveats
+Currently it is not possible to use the routing feature of Tailscale where your Synology would act as a gateway to your whole subnet. Instead you need to install Tailscale on each device you need to access.
+The reason is missing modules in the Linux kernel used by Synology (in DSM 6). Hopefully this is fixed for DSM 7, which is in beta.
+Read more details here: https://github.com/tailscale/tailscale/issues/451#issuecomment-641506017
+When you run Tailscale on a Synology you will be informed of this.
+
 ## Disclaimer
 
 You use everything here at your own risk. I am not responsible if this
